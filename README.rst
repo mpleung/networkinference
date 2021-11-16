@@ -8,7 +8,7 @@ Links
 
 A tutorial can be found at
 
-  https://github.com/mpleung/networkinference/docs/tutorial/tutorial.ipynb
+  https://github.com/mpleung/networkinference/blob/main/docs/tutorial/tutorial.ipynb
 
 Online documentation, which contains minimal working examples for all functions and classes, is available at
 
