@@ -1,0 +1,11 @@
+*.DS_Store
+*.pyc
+*.swp
+*.bak
+*.egg-info
+__pycache__
+docs/build
+Makefile
+make.bat
+tests
+dist
