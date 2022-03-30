@@ -1,7 +1,7 @@
 networkinference Documentation
 ==============================
 
-``networkinference`` is a Python 3 package implementing econometric methods for inference with data exhibiting network dependence or other forms of complex or unknown weak dependence. The package is developed by `Michael P. Leung <https://mpleung.github.io>`_ and distributed under the 3-Clause BSD license. 
+``networkinference`` is a Python 3 package implementing econometric methods for inference with data exhibiting network dependence or other forms of complex or unknown weak dependence. The package is developed by `Michael P. Leung <https://mpleung.github.io>`_ and distributed under the 3-Clause BSD license. Much of the package is based on work supported by NSF grant SES-1755100.
 
 Links
 -----
