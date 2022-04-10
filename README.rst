@@ -52,10 +52,10 @@ Example Usage
 
 References
 ----------
-.. [1] Kojevnikov, D., V. Marmer, and K. Song, "Limit Theorems for Network Dependent Random Variables," *Journal of Econometrics*, 2021, 222 (2), 882-908.
-.. [2] Leung, M. "Causal Inference Under Approximate Neighborhood Interference," *Econometrica* (forthcoming), 2021.
-.. [3] Leung, M. "Dependence-Robust Inference Using Resampled Statistics," *Journal of Applied Econometrics* (forthcoming), 2021. 
-.. [4] Leung, M., "Network Cluster-Robust Inference," *arXiv preprint arXiv:2103.01470*, 2021.
+.. [1] Kojevnikov, D., V. Marmer, and K. Song, "Limit Theorems for Network Dependent Random Variables," *Journal of Econometrics*, 2021, 222(2), 882-908.
+.. [2] Leung, M. "Causal Inference Under Approximate Neighborhood Interference," *Econometrica*, 2022, 90(1), 267-293.
+.. [3] Leung, M. "Dependence-Robust Inference Using Resampled Statistics," *Journal of Applied Econometrics*, 2022, 37(2), 270-285.
+.. [4] Leung, M., "Network Cluster-Robust Inference," *arXiv preprint arXiv:2103.01470*, 2022.
 .. [5] Song, K. "Ordering-Free Inference from Locally Dependent Data," *UBC working paper*, 2016.
 
 Dependencies
