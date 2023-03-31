@@ -621,7 +621,7 @@ class TSLS(OLS):
         return thetahat
 
 class IPW(OLS):
-    """Horovitz-Thompson estimator (inverse probability weighting with known propensity scores). See e.g. [1]_ Formula: 
+    """Horvitz-Thompson estimator (inverse probability weighting with known propensity scores). See e.g. [1]_ Formula: 
 
     .. math::
         \\frac{1}{n} \sum_{i=1}^n \left( \\frac{\\text{ind1}_i}{\\text{pscores1}_i} - \\frac{\\text{ind2}_i}{\\text{pscores2}_i} \\right) Y_i.

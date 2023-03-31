@@ -32,7 +32,7 @@ The package contains three main classes:
 
 * ``OLS``: OLS estimator.
 * ``TSLS``: 2SLS estimator.
-* ``IPW``: Horovitz-Thompson estimator (inverse-probability weighting estimator with known propensity scores).
+* ``IPW``: Horvitz-Thompson estimator (inverse-probability weighting estimator with known propensity scores).
 
 Each class contains five methods for constructing confidence intervals and two methods implementing scalar equality tests. These methods are based on three classes of inference procedures. The first uses a network HAC variance estimator [1]_ [2]_. The second constructs network clusters using spectral clustering and applies a cluster-robust inference method [4]_. Both require network data and account for a general form of network dependence in which observations are less correlated when further apart in the network (in the sense of shortest path distance) [1]_. The third involves resampling and can be applied to weakly dependent network, clustered, time series, or spatial data (or combination or these) without knowledge of the particular type of dependence [3]_ [5]_. However, it is more computationally intensive and requires a larger amount of data to ensure adequate size control and power.
 
@@ -61,10 +61,10 @@ References
 Dependencies
 ------------
 
-* Matplotlib v3.4+
-* NetworkX v2.6+
-* NumPy v1.21+
-* Scikit-learn v0.24+
-* SciPy v1.7+
-* Seaborn v0.11+
-* Tabulate v0.8+
+* Matplotlib v3.7+
+* NetworkX v3.0+
+* NumPy v1.24+
+* Scikit-learn v1.2+
+* SciPy v1.10+
+* Seaborn v0.12+
+* Tabulate v0.9+

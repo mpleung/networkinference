@@ -38,11 +38,11 @@ def nhbr_mean(X, A, distance=1, weight=None):
     """
     n = A.number_of_nodes()
     if distance == 1:
-        A_mat = nx.to_scipy_sparse_matrix(A, nodelist=range(n), weight=weight, format='csc')
+        A_mat = nx.to_scipy_sparse_array(A, nodelist=range(n), weight=weight, format='csc')
         delta = A_mat.dot(np.ones(n)) # number of friends of each node
         Xbar = (A_mat.dot(X)).astype('float')
     else:
-        A_mat = nx.to_scipy_sparse_matrix(A.to_undirected(as_view=True), nodelist=range(n), weight=None, format='csc')
+        A_mat = nx.to_scipy_sparse_array(A.to_undirected(as_view=True), nodelist=range(n), weight=None, format='csc')
         dist_matrix = csgraph.dijkstra(csgraph=A_mat, directed=False, unweighted=True)
         delta = (dist_matrix == distance).dot(np.ones(n)) 
         Xbar = ((dist_matrix == distance).dot(X)).astype('float')
@@ -76,7 +76,7 @@ def adjrownorm(A, weight=None):
     >>> A = FakeData.erdos_renyi()
     >>> A_norm = adjrownorm(A)
     """
-    A_mat = nx.to_scipy_sparse_matrix(A, nodelist=range(A.number_of_nodes()), weight=weight, format='csc')
+    A_mat = nx.to_scipy_sparse_array(A, nodelist=range(A.number_of_nodes()), weight=weight, format='csc')
     deg_seq_sim = A_mat.dot(np.ones(A.number_of_nodes()))
     r,c = A_mat.nonzero() 
     rD_sp = csc_matrix(((1.0/np.maximum(deg_seq_sim,1))[r], (r,c)), shape=(A_mat.shape))
@@ -228,7 +228,7 @@ class FakeData:
         else:
             A = FakeData.random_geometric(n, avg_deg, seed)
         np.random.seed(seed=seed) 
-        A_mat = nx.to_scipy_sparse_matrix(A, nodelist=range(n), format='csc')
+        A_mat = nx.to_scipy_sparse_array(A, nodelist=range(n), format='csc')
         A_norm = adjrownorm(A)
         D = np.random.binomial(1,p,n) # treatments
         b0 = np.random.normal(1,1,size=n)

@@ -1,7 +1,7 @@
 import numpy as np, networkx as nx, matplotlib.pyplot as plt, seaborn as sns, itertools
 from tabulate import tabulate
 from scipy.stats import chi2, t
-from scipy.sparse import csgraph
+from scipy.sparse import csgraph, csr_matrix
 from scipy.linalg import block_diag
 from scipy.sparse.linalg import eigsh
 from scipy.linalg import eigh
@@ -196,7 +196,7 @@ class core:
             weights = np.eye(n)
             APL = 0
         else:
-            G = nx.to_scipy_sparse_matrix(A.to_undirected(as_view=True), nodelist=range(n), weight=None, format='csr') # sparse matrix representation
+            G = nx.to_scipy_sparse_array(A.to_undirected(as_view=True), nodelist=range(n), weight=None, format='csr') # sparse matrix representation
             dist_matrix = csgraph.dijkstra(csgraph=G, directed=False, unweighted=True) # path distance matrix
             Gcc = [A.subgraph(c).copy() for c in sorted(nx.connected_components(A), key=len, reverse=True)]
             giant = [i for i in Gcc[0]] # set of nodes in giant component
@@ -251,7 +251,7 @@ class core:
         >>> import networkinference as ni
         >>> from networkinference.utils import FakeData
         >>> A = FakeData.erdos_renyi(500)
-        >>> sumstats(A) 
+        >>> ni.core.sumstats(A) 
         """
         numnodes = A.number_of_nodes()
         numedges = A.number_of_edges()
@@ -319,7 +319,7 @@ class core:
         >>> import networkinference as ni
         >>> from networkinference.utils import FakeData
         >>> A = FakeData.erdos_renyi(500)
-        >>> plot_spectrum(A)
+        >>> ni.core.plot_spectrum(A)
         """
         if giant:
             Gcc = [A.subgraph(c).copy() for c in sorted(nx.connected_components(A), key=len, reverse=True)]
@@ -327,7 +327,7 @@ class core:
         else:
             G = A
         n = G.number_of_nodes()
-        L = csgraph.laplacian(nx.to_scipy_sparse_matrix(G, weight=weight, format='csr'), normed=True)
+        L = csgraph.laplacian(csr_matrix(nx.to_scipy_sparse_array(G, weight=weight, format='csr')), normed=True)
         ivals = eigh(L.todense(), eigvals_only=True)
 
         sns.set_theme(style='dark')
@@ -375,14 +375,14 @@ class core:
         >>> import networkinference as ni
         >>> from networkinference.utils import FakeData
         >>> A = FakeData.erdos_renyi(500)
-        >>> ivals = spectrum(A)
+        >>> ivals = ni.core.spectrum(A)
         """
         if giant:
             Gcc = [A.subgraph(c).copy() for c in sorted(nx.connected_components(A), key=len, reverse=True)]
             G = Gcc[0]
         else:
             G = A
-        L = csgraph.laplacian(nx.to_scipy_sparse_matrix(G, weight=weight, format='csr'), normed=True)
+        L = csgraph.laplacian(csr_matrix(nx.to_scipy_sparse_array(G, weight=weight, format='csr')), normed=True)
         return eigh(L.todense(), eigvals_only=True)
 
     @staticmethod
@@ -417,7 +417,7 @@ class core:
         """
         A_components = [A.subgraph(c).copy() for c in sorted(nx.connected_components(A), key=len, reverse=True)]
         A_giant = A_components[0]
-        L = csgraph.laplacian(nx.to_scipy_sparse_matrix(A_giant, format='csr'), normed=True) # sparse laplacian matrix of the network restricted to the giant component
+        L = csgraph.laplacian(csr_matrix(nx.to_scipy_sparse_array(A_giant, format='csr')), normed=True) # sparse laplacian matrix of the network restricted to the giant component
 
         ivals, ivecs = eigsh(L, k=num_clusters, which='SM')
         ivecs /= np.sqrt( (ivecs**2).sum(axis=1) )[:,None] # row normalize by row norm
