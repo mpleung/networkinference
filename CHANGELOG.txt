@@ -2,3 +2,8 @@ v0.0.0, 2021/11 -- Initial release.
 v0.0.1, 2021/11 -- Fix documentation typos.
 v0.0.2, 2022/04 -- Update documentation links and references.
 v0.0.3, 2023/03 -- Update to_scipy_sparse_matrix() -> to_scipy_sparse_array().
+v0.0.4, 2024/02 -- The csgraph.dijkstra() function does not play well with
+with sparse arrays, so the input is now converted to a dense array first.
+FakeData.linear_in_means() no longer generates an error due to identity being
+formatted as csc (but it now generates a warning...).
+

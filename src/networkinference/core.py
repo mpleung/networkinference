@@ -197,7 +197,7 @@ class core:
             APL = 0
         else:
             G = nx.to_scipy_sparse_array(A.to_undirected(as_view=True), nodelist=range(n), weight=None, format='csr') # sparse matrix representation
-            dist_matrix = csgraph.dijkstra(csgraph=G, directed=False, unweighted=True) # path distance matrix
+            dist_matrix = csgraph.dijkstra(csgraph=G.toarray(), directed=False, unweighted=True) # path distance matrix
             Gcc = [A.subgraph(c).copy() for c in sorted(nx.connected_components(A), key=len, reverse=True)]
             giant = [i for i in Gcc[0]] # set of nodes in giant component
             APL = dist_matrix[np.ix_(giant,giant)].sum() / len(giant) / (len(giant)-1) # average path length

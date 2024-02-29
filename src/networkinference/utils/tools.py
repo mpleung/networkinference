@@ -43,7 +43,7 @@ def nhbr_mean(X, A, distance=1, weight=None):
         Xbar = (A_mat.dot(X)).astype('float')
     else:
         A_mat = nx.to_scipy_sparse_array(A.to_undirected(as_view=True), nodelist=range(n), weight=None, format='csc')
-        dist_matrix = csgraph.dijkstra(csgraph=A_mat, directed=False, unweighted=True)
+        dist_matrix = csgraph.dijkstra(csgraph=A_mat.toarray(), directed=False, unweighted=True)
         delta = (dist_matrix == distance).dot(np.ones(n)) 
         Xbar = ((dist_matrix == distance).dot(X)).astype('float')
 
@@ -120,7 +120,7 @@ class FakeData:
         errors = np.random.normal(size=n)
         A_norm = adjrownorm(A)
         eps = errors + A_norm.dot(errors)
-        LIM_inv = inv( identity(n,format='csc') - theta[1]*A_norm )
+        LIM_inv = inv( identity(n) - theta[1]*A_norm )
         Y = LIM_inv.dot( (theta[0] + theta[2]*A_norm.dot(X) + theta[3]*X + eps) )
         return Y, X
 
